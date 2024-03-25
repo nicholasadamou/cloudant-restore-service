@@ -28,5 +28,4 @@ services:
                   *cos_vars
               ]
         volumes:
-            - ./src:/code/src
             - ./.env:/code/.env

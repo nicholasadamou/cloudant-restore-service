@@ -1,0 +1,44 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Database Restore API"
+host: "localhost:3000"
+basePath: "/"
+schemes:
+  - "http"
+paths:
+  /db/restore:
+    post:
+      summary: "Restore databases"
+      description: "This API endpoint allows you to restore a list of databases."
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "databases"
+          description: "List of databases to be restored."
+          required: true
+          schema:
+            type: "object"
+            properties:
+              databases:
+                type: "array"
+                items:
+                  type: "string"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        500:
+          description: "Error occurred during the operation"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"

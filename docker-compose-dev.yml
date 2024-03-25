@@ -1,0 +1,32 @@
+version: '3.9'
+
+x-cloudant-vars: &cloudant_vars
+    CLOUDANT_APIKEY: ${CLOUDANT_APIKEY}
+    CLOUDANT_URL: ${CLOUDANT_URL}
+    CLOUDANT_USERNAME: ${CLOUDANT_USERNAME}
+    CLOUDANT_PASSWORD: ${CLOUDANT_PASSWORD}
+
+x-cos-vars: &cos_vars
+    COS_BUCKET_NAME: ${COS_BUCKET_NAME}
+    COS_API_KEY: ${COS_API_KEY}
+    COS_ENDPOINT: ${COS_ENDPOINT}
+    COS_INSTANCE_ID: ${COS_INSTANCE_ID}
+
+services:
+    cloudant-restore-service:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        container_name: cloudant-restore-service
+        hostname: cloudant-restore-service.local
+        image: cloudant-restore-service:latest
+        platform: linux/amd64
+        environment:
+            <<:
+              [
+                  *cloudant_vars,
+                  *cos_vars
+              ]
+        volumes:
+            - ./src:/code/src
+            - ./.env:/code/.env

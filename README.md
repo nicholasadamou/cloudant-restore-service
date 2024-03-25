@@ -55,6 +55,30 @@ Optionally, you can use the following command to run the service using Docker in
 ./containerizer prod build && ./containerizer prod up
 ```
 
+## Routes
+
+### `\api-docs`
+
+This endpoint serves up the Swagger-based API documentation. Swagger is a powerful tool for designing APIs. It provides several benefits including:
+
+#### Interactive Documentation
+
+Interactive documentation allows developers and non-developers to interact with your API in the browser. They can perform HTTP requests to your API endpoints and observe the responses in real-time. In your service, you've integrated Swagger's interactive documentation at the `/api-docs` route. This means anyone can navigate to that route (i.e., `http://<your-service-url>/api-docs`) and start interacting with the API.
+
+#### Structure
+
+Swagger helps in designing structured APIs. It uses a common language to define APIs, making them understandable by humans and machines. It standardizes the way APIs are designed, which helps to maintain consistency across different APIs.
+
+#### Integration and Usage
+
+Swagger is integrated with modern programming languages and frameworks, which enhances its flexibilities. It can be used at various stages of an API lifecycle including design, building, testing, and documentation.
+
+In your service, you can update the [`swagger.yml`](swagger.yml) file to define the structure of your API endpoints, including request bodies, response bodies, status codes, and other metadata. When your service starts, the Swagger documentation is generated automatically based on your `swagger.yml` file. The `swagger-ui-express` middleware serves this documentation at the route you've specified (`/api-docs` in this case).
+
+#### Limitations
+
+While the Swagger API documentation tooling provides numerous benefits, it's important to note that it does not replace comprehensive API documentation. It is useful primarily for detailing route specifics, request/response formats, and giving high-level overviews. More detailed documentation regarding the background, version changelogs, rate limits, usage examples, etc., is often necessary and won't be covered by Swagger.
+
 ## API
 
 The service exposes the following endpoints:
@@ -88,25 +112,3 @@ Example request body:
 #### Errors
 
 In the event of a error during the restoration process, the error is logged for debugging purposes.
-
-### `\api-docs`
-
-This endpoint serves up the Swagger-based API documentation. Swagger is a powerful tool for designing APIs. It provides several benefits including:
-
-#### Interactive Documentation
-
-Interactive documentation allows developers and non-developers to interact with your API in the browser. They can perform HTTP requests to your API endpoints and observe the responses in real-time. In your service, you've integrated Swagger's interactive documentation at the `/api-docs` route. This means anyone can navigate to that route (i.e., `http://<your-service-url>/api-docs`) and start interacting with the API.
-
-#### Structure
-
-Swagger helps in designing structured APIs. It uses a common language to define APIs, making them understandable by humans and machines. It standardizes the way APIs are designed, which helps to maintain consistency across different APIs.
-
-#### Integration and Usage
-
-Swagger is integrated with modern programming languages and frameworks, which enhances its flexibilities. It can be used at various stages of an API lifecycle including design, building, testing, and documentation.
-
-In your service, you can update the [`swagger.yml`](swagger.yml) file to define the structure of your API endpoints, including request bodies, response bodies, status codes, and other metadata. When your service starts, the Swagger documentation is generated automatically based on your `swagger.yml` file. The `swagger-ui-express` middleware serves this documentation at the route you've specified (`/api-docs` in this case).
-
-#### Limitations
-
-While the Swagger API documentation tooling provides numerous benefits, it's important to note that it does not replace comprehensive API documentation. It is useful primarily for detailing route specifics, request/response formats, and giving high-level overviews. More detailed documentation regarding the background, version changelogs, rate limits, usage examples, etc., is often necessary and won't be covered by Swagger.
